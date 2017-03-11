@@ -1,0 +1,29 @@
+{
+  "name": "estudiar-cookies-y-sessions-en-expressjs-andrea-carlos-35l1-p4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ULL-ESIT-DSI-1617/estudiar-cookies-y-sessions-en-expressjs-andrea-carlos-35l1-p4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ULL-ESIT-DSI-1617/estudiar-cookies-y-sessions-en-expressjs-andrea-carlos-35l1-p4/issues"
+  },
+  "homepage": "https://github.com/ULL-ESIT-DSI-1617/estudiar-cookies-y-sessions-en-expressjs-andrea-carlos-35l1-p4#readme",
+  "dependencies": {
+    "express": "^4.15.2",
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-shell": "^0.6.3"
+  }
+}
