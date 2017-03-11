@@ -17,7 +17,7 @@ gulp.task('deploypush', ['deploy'], function() {
 })
 
 gulp.task('deploygb', shell.task([
-    'cd html'+
+    'cd docs'+
     ';'+
     'git add .'+
     ';'+
