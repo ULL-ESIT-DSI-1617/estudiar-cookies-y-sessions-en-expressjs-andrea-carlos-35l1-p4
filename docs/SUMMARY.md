@@ -11,3 +11,4 @@
 * [Markdown](capituloMarkdown/Markdown.md)
 * [Express](express/express.md)
 * [Cookies](capitulocookies/cookies.md)
+* [Query String](capituloQueryString/queryString.md)

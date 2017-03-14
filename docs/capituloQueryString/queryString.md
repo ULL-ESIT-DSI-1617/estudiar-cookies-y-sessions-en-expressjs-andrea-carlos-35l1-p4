@@ -11,4 +11,10 @@ Puede ocurrir que existan campo del query string que no sean visibles para el us
 
 Existen símbolos que no pueden ser incluidos en la url, y por tanto es necesario codificarlos. Por ejemplo el espacio se codifica como **'\+'** o **%20**. Los caracteres que no pueden ser usados son sustituidos por una referencia numérica (NCR), o codificados en hexadecimal.
 
-#Tracking 
+#Tracking
+
+Parte de la query string puede ser ignorada al realizar una petición. Esto nos permite atribuirle funciones similares a cookies, al poder añadir al usuario como query string de la URL.
+Las principales diferencias entre usar cookies y el tracking con query string son:
+* Un cookie no viene integrado en la URL y por tanto no se puede compartir, mientras que de esta manera, al compartir la URL se comparte la identificación.
+* Al acceder desde distintos path, habran URL distintas, pero los cookies siempre deberían ser los mismos.
+* Los cookies pueden ser deshabilitados, el tracking con query string no.
