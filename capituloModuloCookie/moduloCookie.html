@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Markdown · GitBook</title>
+        <title>Modulo Cookie(hay que buscarle lugar · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../express/express.html" />
     
-    
-    <link rel="prev" href="../capituloC9/c9.html" />
+    <link rel="prev" href="../capituloQueryString/queryString.html" />
     
 
     </head>
@@ -193,9 +191,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.9" data-path="Markdown.html">
+        <li class="chapter " data-level="1.9" data-path="../capituloMarkdown/Markdown.html">
             
-                <a href="Markdown.html">
+                <a href="../capituloMarkdown/Markdown.html">
             
                     
                     Markdown
@@ -245,9 +243,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.13" data-path="../capituloModuloCookie/moduloCookie.html">
+        <li class="chapter active" data-level="1.13" data-path="moduloCookie.html">
             
-                <a href="../capituloModuloCookie/moduloCookie.html">
+                <a href="moduloCookie.html">
             
                     
                     Modulo Cookie(hay que buscarle lugar
@@ -288,7 +286,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Markdown</a>
+        <a href=".." >Modulo Cookie(hay que buscarle lugar</a>
     </h1>
 </div>
 
@@ -303,65 +301,65 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="markdown">Markdown</h1>
-<h2 id="introducci&#xF3;n">Introducci&#xF3;n.</h2>
-<p>  Markdown es un m&#xE9;todo de escritura que tiene como objetivo mantener una forma sencilla y legible de escribir, con
-la posibilidad de a&#xF1;adir formatos como negrita, enlaces, im&#xE1;genes etc, mediante &#xFA;nicamente texto plano.
-Nos proporciona una forma sencilla de construir documentos html(tras una conversi&#xF3;n como podr&#xED;a ser usando <a href="../capituloPandoc/Pandoc.html">Pandoc</a>
-o <a href="../capituloX/Gitbook.html">Gitbook</a>).</p>
-<h2 id="uso-b&#xE1;sico">Uso B&#xE1;sico.</h2>
-<p>Para dar formato al texto que queremos incluir en nuestro documento, ser&#xE1; necesario realizar peque&#xF1;os cambios al documento:</p>
-<p>Para a&#xF1;adir un titulo o subtitulo utilizamos # una o m&#xE1;s veces</p>
+                                <h1 id="cookies">Cookies</h1>
+<p>Un cookie es un peque&#xF1;o fragmento de codigo enviado por una p&#xE1;gina y almacenado en el navegador. Cada vez que el usuario entra en la p&#xE1;gina, el navegador reenvia el cookie para identificar al usuario.
+Es necesario instalar el middleware cookie-parser para comenzar a trabajar con ellos:</p>
+<pre><code>npm install cookie-parser --save
+</code></pre><p>Para importar un cookie a nuestra aplicaci&#xF3;n:</p>
+<pre><code>var express = require(&apos;express&apos;);
+var cookieParser = require(&apos;cookie-parser&apos;);
+var app = express();
+
+app.use(cookieParser());
+</code></pre><p>Podemos incluir un nuevo cookie usando la siguiente sintaxis:</p>
+<pre><code>app.get(&apos;/cookie&apos;,function(req, res){
+     res.cookie(&apos;cookie_name&apos;, &apos;cookie_value&apos;)
+       &quot;Estoy creando un cookie nuevo&quot;);
+});
+</code></pre><p>Escribiendo en la consola del navegador <strong>&apos;document.cookie.&apos;</strong> podemos ver los cookies que tenemos en uso.
+<img src="doc_cookie.png" alt="foto"></p>
+<p>Tambi&#xE9;n podemos obtenerlo con el m&#xE9;todo <strong>&apos;req.cookies&apos;</strong>.</p>
+<pre><code>app.get(&apos;/&apos;, function(req, res) {
+  console.log(&quot;Cookies :  &quot;, req.cookies);
+});
+</code></pre><p>Si lo que queremos es ponerle un tiempo para que expire el cookie podemos usar la opcion expire o maxage:</p>
+<pre><code>res.cookie(&apos;cookie_name&apos;, &apos;cookie_value&apos;, {expire : new Date() + 9999});
+res.cookie(&apos;cookie_name&apos;, &apos;cookie_value&apos;, {maxAge : 9999});
+</code></pre><p>Por &#xFA;ltimo, si queremos borrar un cookie, podemos usar <strong><em>&apos;clearCookie(&apos;nombre&apos;)&apos;</em></strong></p>
+<pre><code>app.get(&apos;/clearcookie&apos;, function(req,res){
+     res.clearCookie(&apos;cookie_name&apos;);
+     res.clearCookie(cookiess);
+     res.clearCookie(setCookie);
+     res.send(&apos;Cookie deleted&apos;);
+});
+</code></pre><h2 id="cookie-module">Cookie Module</h2>
+<p>Para su uso primero es necesario instalar su modulo.</p>
+<pre><code>npm install cookie --save
+</code></pre><p> y para su uso:</p>
+<pre><code>var cookie = require(&apos;cookie&apos;);
+</code></pre><h3 id="cookieparse">Cookie.parse.</h3>
+<p>Con el m&#xE9;todo parse, podemos pasarle una lista de cookies y nos devolver&#xE1; un objeto que contenga cada par nombre-valor:</p>
+<pre><code>var cookies = cookie.parse(&apos;nombre=valor; name=value&apos;);
+</code></pre><p>Que podremos mostrar por ejemplo por consola:</p>
+<pre><code>app.get(&apos;/cookiess&apos;,function(req, res){
+        console.log(cookiess)
+});
+</code></pre><p><img src="salidaCookie.png" alt="foto"></p>
+<p>Adem&#xE1;s, se le pueden a&#xF1;adir la opci&#xF3;n <strong><em>&apos;decodeURIComponent&apos;</em></strong> para decodificar el cookie.</p>
+<h3 id="cookieserialize">Cookie.serialize.</h3>
+<p>Permite crear una cadena de ayuda que contiene el par nombre-valor.</p>
+<pre><code>var setCookie = cookie.serialize(&apos;nombres&apos;, &apos;valores&apos;);
+</code></pre><p>Podemos mostrarlo igual que los creados con Cookie.parse</p>
+<p><img src="salidaSetCookie.png" alt="foto"></p>
+<p>Este m&#xE9;todo acepta opciones como tercer atributo:</p>
 <ul>
-<li># Titulo<h1 id="titulo">Titulo</h1>
-</li>
-<li>## Subtitulo<h2 id="subtitulo">Subtitulo</h2>
-</li>
-<li>###Subtitulo<h3 id="subtitulo">Subtitulo</h3>
-</li>
-</ul>
-<p>Para a&#xF1;adir un texto en negrita, escribimos un doble * antes y despu&#xE9;s del texto.</p>
-<ul>
-<li><p>**Negrita**</p>
-<p><strong>Negrita</strong></p>
-</li>
-</ul>
-<p>Para a&#xF1;adir texto en cursiva, escribimos un * antes y despues del texto.  </p>
-<ul>
-<li><p>*Cursiva*</p>
-<p><em>Cursiva</em></p>
-</li>
-</ul>
-<p>Para a&#xF1;adir tanto negrita como cursiva a un texto, utilizamos un triple * antes y despues del texto.</p>
-<ul>
-<li><p>***Negrita y cursiva***</p>
-<p><strong><em>Negrita y cursiva</em></strong></p>
-</li>
-</ul>
-<p>Para crear una lista, o enumerar, escribimos al empezar el renglon * , -, o +.</p>
-<ul>
-<li><p>Listas:</p>
-<p>* Elemento 1</p>
-<p>* Elemento 2</p>
-<ul>
-<li>Elemento 1</li>
-<li>Elemento 2</li>
-</ul>
-</li>
-</ul>
-<p>Para a&#xF1;adir enlaces a nuestro texto, escribiremos la palabra que queremos que aparezca en el texto entre corchetes []
-y entre par&#xE9;ntesis escribimos la direcci&#xF3;n ().</p>
-<ul>
-<li><p>[Enlace](Markdown.html)</p>
-<p><a href="Markdown.html">Enlace</a>  </p>
-</li>
-</ul>
-<p>Para a&#xF1;adir imagenes a nuestro texto, debemos incluir la imagen igual que los enlaces, pero a&#xF1;adiedo un signo de exclamaci&#xF3;n
-antes ! .</p>
-<ul>
-<li><p>![Imagen](Imagen.png)</p>
-<p><img src="Imagen.png" alt="Imagen"></p>
-</li>
+<li>domain. Indica el valor del dominio donde se aplica.</li>
+<li>encode. Codificar el valor del cookie.</li>
+<li>expire. Indica hasta cuando funciona el cookie.</li>
+<li>httpOnly. Para activar dicha opci&#xF3;n en el cookie.</li>
+<li>maxAge. Indicando el numero de segundos. Se producir&#xE1; la cuenta atr&#xE1;s.</li>
+<li>path. Para indicar el path por defecto.</li>
+<li>secure. Si el navegador no tiene conexi&#xF3;n https no reenvia el cookie.</li>
 </ul>
 
                                 
@@ -390,14 +388,10 @@ antes ! .</p>
 
             
                 
-                <a href="../capituloC9/c9.html" class="navigation navigation-prev " aria-label="Previous page: Cloud9">
+                <a href="../capituloQueryString/queryString.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Query String">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../express/express.html" class="navigation navigation-next " aria-label="Next page: Express">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -406,7 +400,7 @@ antes ! .</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Markdown","level":"1.9","depth":1,"next":{"title":"Express","level":"1.10","depth":1,"path":"express/express.md","ref":"express/express.md","articles":[]},"previous":{"title":"Cloud9","level":"1.8","depth":1,"path":"capituloC9/c9.md","ref":"capituloC9/c9.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capituloMarkdown/Markdown.md","mtime":"2017-03-15T13:37:44.785Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T14:41:52.652Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Modulo Cookie(hay que buscarle lugar","level":"1.13","depth":1,"previous":{"title":"Query String","level":"1.12","depth":1,"path":"capituloQueryString/queryString.md","ref":"capituloQueryString/queryString.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capituloModuloCookie/moduloCookie.md","mtime":"2017-03-15T13:37:44.785Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T14:41:52.652Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

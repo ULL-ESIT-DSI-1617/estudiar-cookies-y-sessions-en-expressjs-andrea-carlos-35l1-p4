@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Cookies y Sessions · GitBook</title>
+        <title>Cookies · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -56,6 +56,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
+    
+    <link rel="next" href="../capituloQueryString/queryString.html" />
     
     
     <link rel="prev" href="../express/express.html" />
@@ -222,7 +224,33 @@
                 <a href="cookies.html">
             
                     
-                    Cookies y Sessions
+                    Cookies
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="../capituloQueryString/queryString.html">
+            
+                <a href="../capituloQueryString/queryString.html">
+            
+                    
+                    Query String
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="../capituloModuloCookie/moduloCookie.html">
+            
+                <a href="../capituloModuloCookie/moduloCookie.html">
+            
+                    
+                    Modulo Cookie(hay que buscarle lugar
             
                 </a>
             
@@ -260,7 +288,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Cookies y Sessions</a>
+        <a href=".." >Cookies</a>
     </h1>
 </div>
 
@@ -297,9 +325,36 @@ Set-Cookie: tasty_cookie=strawberry
 <pre><code>GET /sample_page.html HTTP/1.1
 Host: www.example.org
 Cookie: yummy_cookie=choco; tasty_cookie=strawberry
-</code></pre><h4 id="session-cookies">Session Cookies</h4>
-<p>Las cookies de sesi&#xF3;n se eliminan cuando el cliente se cierra, solo est&#xE1;n activas durante la sesi&#xF3;n.</p>
-<h4 id="permanent-cookies">Permanent Cookies</h4>
+</code></pre><h5 id="directivas">Directivas</h5>
+<p><strong><cookie-name>=<cookie-value></cookie-value></cookie-name></strong>
+Una cookie puede comenzar con:</p>
+<ul>
+<li>Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pesta&#xF1;as. Tampoco debe contener caracteres como: ( ) &lt; &gt; @ , ; : \ &quot; /  [ ] ? = { }.</cookie-name></li>
+<li>Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier car&#xE1;cter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.</cookie-value></li>
+<li><strong>Secure- prefix: Las cookies con un nombre que comienza con </strong>Secure-(el gui&#xF3;n es parte del prefijo) deben establecerse con el flag secure y deben venir de una p&#xE1;gina segura (HTTPS).</li>
+<li><strong>Host- prefix: Las cookies con un nombre que empiece por </strong>Host- deben estar definidas con el flag secure, deben ser de una p&#xE1;gina segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se env&#xED;an a subdominios) y la ruta debe ser &quot;/&quot;.</li>
+</ul>
+<p><strong>Expires=<date></date></strong> (Optional)
+La vida m&#xE1;xima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendr&#xE1; la vida &#xFA;til de una cookie de sesi&#xF3;n. Una sesi&#xF3;n finaliza cuando el cliente se cierra, lo que significa que las cookies de sesi&#xF3;n se eliminar&#xE1;n en ese momento. Sin embargo, muchos navegadores web tienen una caracter&#xED;stica llamada sesi&#xF3;n de restauraci&#xF3;n que guardar&#xE1; todas las pesta&#xF1;as y que al volver a acceder al navegador ser&#xE1; como si la cookie no se hubiera cerrado nunca.</p>
+<p><strong>Max-Age=<non-zero-digit></non-zero-digit></strong> (Optional)
+N&#xFA;mero de segundos hasta que expire la cookie. Se especifica con uno o m&#xE1;s d&#xED;gitos de 1 a 9. </p>
+<p><strong>Domain=<domain-value></domain-value></strong> (Optional)
+Especifica los hosts a los que se enviar&#xE1; la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicaci&#xF3;n del documento actual (pero sin incluir subdominios). Contrariamente a las especificaciones anteriores, los puntos principales en los nombres de dominio son ignorados. Si se especifica un dominio, los subdominios siempre se incluyen.</p>
+<p><strong>Path=<path-value></path-value></strong> (Optional)
+Indica una ruta URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El car&#xE1;cter slash(&quot;/&quot;) se interpreta como un separador de directorios.</p>
+<p><strong>Secure</strong> (Optional)
+Una secure cookie s&#xF3;lo se enviar&#xE1; al servidor cuando se realice una solicitud utilizando SSL y el protocolo HTTPS. Sin embargo, la informaci&#xF3;n confidencial o sensible nunca debe ser almacenada o transmitida en cookies HTTP, ya que el mecanismo completo es intr&#xED;nsecamente inseguro y esto no significa que cualquier informaci&#xF3;n est&#xE9; cifrada, por ejemplo.
+Los sitios inseguros (http:) no pueden configurar secure cookies. </p>
+<p><strong>HttpOnly</strong> (Optional)
+Las cookies s&#xF3;lo de HTTP no son accesibles a trav&#xE9;s de JavaScript a trav&#xE9;s de la propiedad Document.cookie, las API XMLHttpRequest y Request para evitar ataques contra secuencias de comandos entre sitios (XSS).</p>
+<p><strong>SameSite=Strict</strong>
+<strong>SameSite=Lax</strong> (Optional)
+Permite a los servidores afirmar que una cookie no debe enviarse junto con las solicitudes entre sitios, lo que proporciona cierta protecci&#xF3;n contra los ataques de falsificaci&#xF3;n de solicitudes entre sitios (CSRF).</p>
+<h4 id="session-cookies">Session Cookies</h4>
+<p>Las cookies de sesi&#xF3;n se eliminan cuando el cliente se cierra, solo est&#xE1;n activas durante la sesi&#xF3;n.
+Ejemplo:</p>
+<pre><code>Set-Cookie: sessionid=38afes7a8; httponly; Path=/
+</code></pre><h4 id="permanent-cookies">Permanent Cookies</h4>
 <p>Este tipo de cookies, en vez de expirar al cerrar la sesi&#xF3;n del clientes, estas caducan en una fecha espec&#xED;fica (Expires) o despu&#xE9;s de un per&#xED;odo de tiempo espec&#xED;fico (Max-Age).</p>
 <pre><code>Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
 </code></pre><p>En este ejemplo, se establece una Set-Cookie que permanecer&#xE1; abierta hasta el siguiente Mi&#xE9;rcoles a partir del 21 de Octubre de 2015.</p>
@@ -331,14 +386,11 @@ Para prevenir esto podemos utilizar la HttpOnly Cookie:</p>
 </ul>
 <h3 id="tracking-and-privacy-cookies-de-seguimiento-y-privacidad">Tracking and Privacy (Cookies de seguimiento y privacidad)</h3>
 <h4 id="thrid-party-cookies-cookies-de-terceros">Thrid-party cookies (Cookies de terceros)</h4>
-<p>Las cookies tienen un dominio asociado a ellas. Si este dominio es el mismo que el dominio de la p&#xE1;gina en la que se encuentra, se dice que las cookies son una cookie de primera persona. Si el dominio es diferente, se dice que es una cookie de terceros. Si bien las cookies de primera persona se env&#xED;an &#xFA;nicamente al servidor que las establece, una p&#xE1;gina web puede contener im&#xE1;genes u otros componentes almacenados en servidores de otros dominios (como los banners publicitarios). Las cookies de terceros se utilizan principalmente para publicidad y seguimiento en toda la red.</p>
-<h4 id="eu-cookie-directive">EU cookie directive</h4>
+<p>Las cookies tienen un dominio asociado a ellas. Si este dominio es el mismo que el dominio de la p&#xE1;gina en la que se encuentra, se dice que las cookies son una cookie de primera persona. Si el dominio es diferente, se dice que es una cookie de terceros. Si bien las cookies de primera persona se env&#xED;an &#xFA;nicamente al servidor que las establece, una p&#xE1;gina web puede contener im&#xE1;genes u otros componentes almacenados en servidores de otros dominios (como los banners publicitarios). Las cookies de terceros se utilizan principalmente para publicidad y seguimiento en toda la red.
+Ejemplo:</p>
+<pre><code>Set-Cookie: qwerty=219ffwef9w0f; Domain=somecompany.co.uk; Path=/; Expires=Wed, 30 Aug 2019 00:00:00 GMT
+</code></pre><h4 id="eu-cookie-directive">EU cookie directive</h4>
 <p>La directiva de la UE significa que antes de que alguien pueda almacenar o recuperar cualquier informaci&#xF3;n de un ordenador, tel&#xE9;fono m&#xF3;vil u otro dispositivo, el usuario debe dar su consentimiento para hacerlo.</p>
-<h2 id="set-cookie-ya-lo-hago-yo-que-es-un-apartado-del-primer-punto-y-lo-meter&#xE9;-ahi-lo-dificil-son-los-ejemplos---">Set-cookie (ya lo hago yo que es un apartado del primer punto y lo meter&#xE9; ahi. Lo dificil son los ejemplos -.-)</h2>
-<h2 id="wikipedia-query-string">Wikipedia: Query String</h2>
-<h2 id="cookie-module">Cookie Module</h2>
-<h2 id="cookie-management-in-express">Cookie Management in Express</h2>
-<h2 id="a-very-basic-session-auth-in-nodejs-with-expressjs">A very basic session auth in node.js with express.js</h2>
 
                                 
                                 </section>
@@ -366,10 +418,14 @@ Para prevenir esto podemos utilizar la HttpOnly Cookie:</p>
 
             
                 
-                <a href="../express/express.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Express">
+                <a href="../express/express.html" class="navigation navigation-prev " aria-label="Previous page: Express">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../capituloQueryString/queryString.html" class="navigation navigation-next " aria-label="Next page: Query String">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -378,7 +434,7 @@ Para prevenir esto podemos utilizar la HttpOnly Cookie:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Cookies y Sessions","level":"1.11","depth":1,"previous":{"title":"Express","level":"1.10","depth":1,"path":"express/express.md","ref":"express/express.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulocookies/cookies.md","mtime":"2017-03-13T14:35:40.993Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-13T14:49:18.236Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Cookies","level":"1.11","depth":1,"next":{"title":"Query String","level":"1.12","depth":1,"path":"capituloQueryString/queryString.md","ref":"capituloQueryString/queryString.md","articles":[]},"previous":{"title":"Express","level":"1.10","depth":1,"path":"express/express.md","ref":"express/express.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulocookies/cookies.md","mtime":"2017-03-15T14:18:24.166Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T14:41:52.652Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
