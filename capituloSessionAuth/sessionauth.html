@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Node JS · GitBook</title>
+        <title>Ejemplo Session Auth · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../capitulogithub/github.html" />
     
-    
-    <link rel="prev" href="../capitulogit/git.html" />
+    <link rel="prev" href="../capituloModuloCookie/moduloCookie.html" />
     
 
     </head>
@@ -115,9 +113,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3" data-path="nodejs.html">
+        <li class="chapter " data-level="1.3" data-path="../capitulonodejs/nodejs.html">
             
-                <a href="nodejs.html">
+                <a href="../capitulonodejs/nodejs.html">
             
                     
                     Node JS
@@ -258,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.14" data-path="../capituloSessionAuth/sessionauth.html">
+        <li class="chapter active" data-level="1.14" data-path="sessionauth.html">
             
-                <a href="../capituloSessionAuth/sessionauth.html">
+                <a href="sessionauth.html">
             
                     
                     Ejemplo Session Auth
@@ -301,7 +299,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Node JS</a>
+        <a href=".." >Ejemplo Session Auth</a>
     </h1>
 </div>
 
@@ -316,31 +314,71 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="node-js">Node Js</h1>
-<h2 id="introducci&#xF3;n">Introducci&#xF3;n.</h2>
-<p>NodeJs es un entorno de ejecuci&#xF3;n de java basado en el motor de JavaScript V8 de Chrome.
-NodeJs utiliza como manipulador de paquetes por defecto npm, poseyendo grandes librer&#xED;as de codigo abierto a su disposici&#xF3;n.</p>
-<h2 id="instalaci&#xF3;n">Instalaci&#xF3;n.</h2>
-<p>Para su instalaci&#xF3;n es necesario descargar el instalador en su propia <a href="https://nodejs.org/es/" target="_blank">p&#xE1;gina</a> y seguir las instrucci&#xF3;nes que se van indicando.</p>
-<p><img src="Instalador.png" alt="Instalador"></p>
-<p>En caso de utilizar plataformas como c9, el nodejs ya vendr&#xE1; preinstalado y podemos comprobar su versi&#xF3;n:</p>
-<p><img src="ComprobarVersion.png" alt="Version">   </p>
-<h2 id="uso-b&#xE1;sico">Uso B&#xE1;sico</h2>
-<p>Algunos comandos b&#xE1;sicos para <strong>npm</strong> podr&#xED;an ser:</p>
+                                <h1 id="un-ejemplo-de-autenticaci&#xF3;n-de-sesi&#xF3;n-en-nodejs-con-expressjs">Un ejemplo de autenticaci&#xF3;n de sesi&#xF3;n en node.js con express.js</h1>
 <ul>
-<li>npm install . Este comando nos permite instalar todas las dependencias encontrados en el fichero package.json.</li>
-<li>npm install <nombre>. Se instala el paquete deseado.</nombre></li>
-<li>npm install -g <nombre>. Se realiza la instalaci&#xF3;n del paquete deseado de forma global.</nombre></li>
-<li>npm install <nombre> --save-dev. Se realiza la instalaci&#xF3;n del paquete deseado como dependencia de desarrollo.</nombre></li>
-<li>npm --help. Se muestra la documentaci&#xF3;n respecto a npm.</li>
+<li><strong>Autenticaci&#xF3;n</strong> es el proceso de verificar si el usuario es de hecho quien se declara ser.</li>
+<li><strong>Autorizaci&#xF3;n</strong> es el proceso de determinar si el usuario tiene los privilegios para acceder a los recursos que ha solicitado.</li>
 </ul>
-<p>El uso b&#xE1;sico de <strong>NodeJs</strong> es:</p>
-<ul>
-<li>node. Se habre la consola de NodeJs.</li>
-<li>node nombrefichero.js. Se ejecuta el fichero de codigo JavaScript deseado.</li>
-<li>.exit. Salir de la consola de NodeJs.</li>
-</ul>
+<p>A continuaci&#xF3;n, se mostrar&#xE1; un ejemplo de c&#xF3;digo node.js de proceso de autenticaci&#xF3;n y autorizaci&#xF3;n mediante session en express.js. En &#xE9;l hay un login, un logout y un get para publicar la p&#xE1;gina. Para ver la el post de la p&#xE1;gina, primero tenemos que iniciar sesi&#xF3;n y as&#xED; nuestra identidad ser&#xE1; verificada y guardada. Cuando hagamos el logout, nuestra identidad se borrar&#xE1;.</p>
+<p>Nombre del fichero: <strong>session_auth.js</strong></p>
+<pre><code>//Importamos los modulos express y express-session. Creamos una variable de express (app) y una de sesi&#xF3;n (session).
+var express = require(&apos;express&apos;),
+    app = express(),
+    session = require(&apos;express-session&apos;);
+app.use(session({
+    secret: &apos;2C44-4D44-WppQ38S&apos;,
+    resave: true,
+    saveUninitialized: true
+}));
 
+//Funci&#xF3;n Middleware de Autenticaci&#xF3;n y Autorizaci&#xF3;n. 
+//Concede el siguiente paso si el usuario es amy y si tiene acceso de administrador.
+var auth = function(req, res, next) {
+  if (req.session &amp;&amp; req.session.user === &quot;amy&quot; &amp;&amp; req.session.admin)
+    return next();
+  else
+    return res.sendStatus(401);
+};
+
+//Login
+//La sesi&#xF3;n ser&#xE1; diferente para cada usuario, y tambi&#xE9;n ser&#xE1; &#xFA;nica para el mismo usuario utilizando diferentes navegadores.
+app.get(&apos;/login&apos;, function (req, res) {
+  if (!req.query.username || !req.query.password) {
+    res.send(&apos;login failed&apos;);
+  } else if(req.query.username === &quot;amy&quot; || req.query.password === &quot;amyspassword&quot;) {
+    req.session.user = &quot;amy&quot;;
+    req.session.admin = true;
+    res.send(&quot;login success!&quot;);
+  }
+});
+
+//Logout
+//Destruye la sesi&#xF3;n.
+app.get(&apos;/logout&apos;, function (req, res) {
+  req.session.destroy();
+  res.send(&quot;logout success!&quot;);
+});
+
+//Get
+//Obtiene el contenido protegido. La funci&#xF3;n de autenticaci&#xF3;n anterior se pasa en el segundo par&#xE1;metro como middleware antes de proceder a servir el contenido al usuario. Si la funci&#xF3;n auth determin&#xF3; que el usuario no es v&#xE1;lido, no pasar&#xE1; a la tercera funci&#xF3;n para servir el contenido.
+app.get(&apos;/content&apos;, auth, function (req, res) {
+    res.send(&quot;You can only see this after you&apos;ve logged in.&quot;);
+});
+
+//Iniciamos la aplicaci&#xF3;n escuchando en el puerto 8088.
+app.listen(8088);
+console.log(&quot;app running at http://localhost:8088&quot;);
+</code></pre><p>Para poder compilar el ejemplo anterior, debemos instalar express y express-session:</p>
+<pre><code>npm install express
+npm install express-session
+</code></pre><p>Ahora podr&#xED;amos ejecutar el fichero con el comando <del>~node session_auth.js</del>~.</p>
+<p>Una vez con el servidor corriendo, podemos acceder a las siguientes direcciones:</p>
+<pre><code>localhost:8088/content
+localhost:8088/login?username=amy&amp;password=amyspassword
+localhost:8088/content
+localhost:8088/logout
+localhost:8088/content
+</code></pre>
                                 
                                 </section>
                             
@@ -367,14 +405,10 @@ NodeJs utiliza como manipulador de paquetes por defecto npm, poseyendo grandes l
 
             
                 
-                <a href="../capitulogit/git.html" class="navigation navigation-prev " aria-label="Previous page: Git">
+                <a href="../capituloModuloCookie/moduloCookie.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Modulo Cookie">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../capitulogithub/github.html" class="navigation navigation-next " aria-label="Next page: Github">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -383,7 +417,7 @@ NodeJs utiliza como manipulador de paquetes por defecto npm, poseyendo grandes l
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Node JS","level":"1.3","depth":1,"next":{"title":"Github","level":"1.4","depth":1,"path":"capitulogithub/github.md","ref":"capitulogithub/github.md","articles":[]},"previous":{"title":"Git","level":"1.2","depth":1,"path":"capitulogit/git.md","ref":"capitulogit/git.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulonodejs/nodejs.md","mtime":"2017-03-15T15:07:23.573Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T15:28:33.454Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Ejemplo Session Auth","level":"1.14","depth":1,"previous":{"title":"Modulo Cookie","level":"1.13","depth":1,"path":"capituloModuloCookie/moduloCookie.md","ref":"capituloModuloCookie/moduloCookie.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capituloSessionAuth/sessionauth.md","mtime":"2017-03-15T15:07:23.561Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T15:28:33.454Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
