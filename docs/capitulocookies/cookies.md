@@ -34,7 +34,7 @@ Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 
 #####Directivas
 
-**cookie-name=cookie-value'**
+**\<cookie-name\>=\<cookie-value\>**
 Una cookie puede comenzar con:
 * Un '<cookie-name>' puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
 * Un '<cookie-value>' puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
