@@ -12,4 +12,5 @@
 * [Express](express/express.md)
 * [Cookies](capitulocookies/cookies.md)
 * [Query String](capituloQueryString/queryString.md)
-* [Modulo Cookie(hay que buscarle lugar](capituloModuloCookie/moduloCookie.md)
+* [Modulo Cookie](capituloModuloCookie/moduloCookie.md)
+* [Ejemplo Session Auth](capituloSessionAuth.md)
