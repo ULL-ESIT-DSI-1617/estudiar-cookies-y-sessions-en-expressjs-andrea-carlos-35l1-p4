@@ -39,8 +39,8 @@ Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 Una cookie puede comenzar con:
 * Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
 * Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
-* __Secure- prefix: Las cookies con un nombre que comienza con __Secure-(el guión es parte del prefijo) deben establecerse con el flag secure y deben venir de una página segura (HTTPS).
-* __Host- prefix: Las cookies con un nombre que empiece por __Host- deben estar definidas con el flag secure, deben ser de una página segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se envían a subdominios) y la ruta debe ser "/".
+* ** \_\_Secure- prefix: ** Las cookies con un nombre que comienza con \_\_Secure- (el guión es parte del prefijo) deben establecerse con el flag secure y deben venir de una página segura (HTTPS).
+* ** \_\_Host- prefix: ** Las cookies con un nombre que empiece por \_\_Host- deben estar definidas con el flag secure, deben ser de una página segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se envían a subdominios) y la ruta debe ser "/".
 
 **Expires=<date>** (Optional)
 La vida máxima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendrá la vida útil de una cookie de sesión. Una sesión finaliza cuando el cliente se cierra, lo que significa que las cookies de sesión se eliminarán en ese momento. Sin embargo, muchos navegadores web tienen una característica llamada sesión de restauración que guardará todas las pestañas y que al volver a acceder al navegador será como si la cookie no se hubiera cerrado nunca.
@@ -61,18 +61,18 @@ Los sitios inseguros (http:) no pueden configurar secure cookies.
 **HttpOnly** (Optional)
 Las cookies sólo de HTTP no son accesibles a través de JavaScript a través de la propiedad Document.cookie, las API XMLHttpRequest y Request para evitar ataques contra secuencias de comandos entre sitios (XSS).
 
-**SameSite=Strict**
-**SameSite=Lax** (Optional)
+** SameSite=Strict **
+** SameSite=Lax ** (Optional)
 Permite a los servidores afirmar que una cookie no debe enviarse junto con las solicitudes entre sitios, lo que proporciona cierta protección contra los ataques de falsificación de solicitudes entre sitios (CSRF).
 
-####Session Cookies
+#### Session Cookies
 Las cookies de sesión se eliminan cuando el cliente se cierra, solo están activas durante la sesión.
 Ejemplo:
 ~~~
 Set-Cookie: sessionid=38afes7a8; httponly; Path=/
 ~~~
 
-####Permanent Cookies
+#### Permanent Cookies
 Este tipo de cookies, en vez de expirar al cerrar la sesión del clientes, estas caducan en una fecha específica (Expires) o después de un período de tiempo específico (Max-Age).
 
 ~~~
@@ -81,7 +81,7 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT;
 
 En este ejemplo, se establece una Set-Cookie que permanecerá abierta hasta el siguiente Miércoles a partir del 21 de Octubre de 2015.
 
-####Secure and HttpOnly cookies
+#### Secure and HttpOnly cookies
 Una Secure Cookie sólo se enviará al servidor cuando se realice una solicitud utilizando los protocolos SSL y HTTPS. Las HttpPnly cookies no son accesibles a través de JavaScript con las propiedades Document.cookie, las API XMLHttpRequest y Request.
 
 Para añadir estos dos tipos de cookies a nuestro Set-Cookie, debemos poner:
@@ -92,8 +92,8 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 
 ####Scope of ookies (alcance de las cookies)
 Las directivas de dominio y ruta definen el ámbito de la cookie, es decir, el conjunto de URL a las que se deben enviar las cookies.
-El **dominio** especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un ~~~Domain=mozilla.org~~~, las cookies se incluyen en subdominios como ~~~developer.mozilla.org~~~.
-**Path** indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash ("/") se interpreta como un separador de directorios y los subdirectorios se emparejarán también. Por ejemplo, si establecemos ~~~Path=/docs~~~, rutas válidas podrían ser: "/docs", "/docs/Web/" o "/docs/Web/HTTP".
+El **dominio** especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un Domain=mozilla.org, las cookies se incluyen en subdominios como developer.mozilla.org.
+**Path** indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash ("/") se interpreta como un separador de directorios y los subdirectorios se emparejarán también. Por ejemplo, si establecemos Path=/docs, rutas válidas podrían ser: "/docs", "/docs/Web/" o "/docs/Web/HTTP".
 
 ####SameSite cookies
 Este tipo de cookie permiten a los servidores afirmar que una cookie no debe enviarse junto con el resto de solicitudes.
