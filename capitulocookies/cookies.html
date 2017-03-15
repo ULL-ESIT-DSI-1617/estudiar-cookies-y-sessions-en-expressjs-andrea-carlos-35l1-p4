@@ -339,29 +339,29 @@ Set-Cookie: tasty_cookie=strawberry
 Host: www.example.org
 Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 </code></pre><h5 id="directivas">Directivas</h5>
-<p><strong><cookie-name>=<cookie-value></cookie-value></cookie-name></strong>
-Una cookie puede comenzar con:</p>
+<p><strong> &lt; cookie-name &gt; = &lt; cookie-value &gt; </strong>  </p>
+<p>Una cookie puede comenzar con:</p>
 <ul>
-<li>Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pesta&#xF1;as. Tampoco debe contener caracteres como: ( ) &lt; &gt; @ , ; : \ &quot; /  [ ] ? = { }.</cookie-name></li>
-<li>Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier car&#xE1;cter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.</cookie-value></li>
-<li><strong>Secure- prefix: Las cookies con un nombre que comienza con </strong>Secure-(el gui&#xF3;n es parte del prefijo) deben establecerse con el flag secure y deben venir de una p&#xE1;gina segura (HTTPS).</li>
-<li><strong>Host- prefix: Las cookies con un nombre que empiece por </strong>Host- deben estar definidas con el flag secure, deben ser de una p&#xE1;gina segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se env&#xED;an a subdominios) y la ruta debe ser &quot;/&quot;.</li>
+<li>Un &lt; cookie-name &gt; puede ser cualquier cosa menos caracteres de control o espacios y pesta&#xF1;as. Tampoco debe contener caracteres como: ( ) &lt; &gt; @ , ; : \ &quot; /  [ ] ? = { }.</li>
+<li>Un &lt; cookie-value &gt; puede estar configurado opcionalmente entre comillas dobles y cualquier car&#xE1;cter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.</li>
+<li><strong> __Secure- prefix: </strong> Las cookies con un nombre que comienza con __Secure- (el gui&#xF3;n es parte del prefijo) deben establecerse con el flag secure y deben venir de una p&#xE1;gina segura (HTTPS).</li>
+<li><strong> __Host- prefix: </strong> Las cookies con un nombre que empiece por __Host- deben estar definidas con el flag secure, deben ser de una p&#xE1;gina segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se env&#xED;an a subdominios) y la ruta debe ser &quot;/&quot;.</li>
 </ul>
-<p><strong>Expires=<date></date></strong> (Optional)
+<p><strong>Expires=&lt; date &gt;</strong> (Optional)
 La vida m&#xE1;xima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendr&#xE1; la vida &#xFA;til de una cookie de sesi&#xF3;n. Una sesi&#xF3;n finaliza cuando el cliente se cierra, lo que significa que las cookies de sesi&#xF3;n se eliminar&#xE1;n en ese momento. Sin embargo, muchos navegadores web tienen una caracter&#xED;stica llamada sesi&#xF3;n de restauraci&#xF3;n que guardar&#xE1; todas las pesta&#xF1;as y que al volver a acceder al navegador ser&#xE1; como si la cookie no se hubiera cerrado nunca.</p>
-<p><strong>Max-Age=<non-zero-digit></non-zero-digit></strong> (Optional)
-N&#xFA;mero de segundos hasta que expire la cookie. Se especifica con uno o m&#xE1;s d&#xED;gitos de 1 a 9. </p>
-<p><strong>Domain=<domain-value></domain-value></strong> (Optional)
+<p><strong>Max-Age=&lt; non-zero-digit &gt;</strong> (Optional)
+N&#xFA;mero de segundos hasta que expire la cookie. Se especifica con uno o m&#xE1;s d&#xED;gitos de 1 a 9.</p>
+<p><strong>Domain=&lt; domain-value &gt;</strong> (Optional)
 Especifica los hosts a los que se enviar&#xE1; la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicaci&#xF3;n del documento actual (pero sin incluir subdominios). Contrariamente a las especificaciones anteriores, los puntos principales en los nombres de dominio son ignorados. Si se especifica un dominio, los subdominios siempre se incluyen.</p>
-<p><strong>Path=<path-value></path-value></strong> (Optional)
+<p><strong>Path=&lt; path-value &gt;</strong> (Optional)
 Indica una ruta URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El car&#xE1;cter slash(&quot;/&quot;) se interpreta como un separador de directorios.</p>
 <p><strong>Secure</strong> (Optional)
 Una secure cookie s&#xF3;lo se enviar&#xE1; al servidor cuando se realice una solicitud utilizando SSL y el protocolo HTTPS. Sin embargo, la informaci&#xF3;n confidencial o sensible nunca debe ser almacenada o transmitida en cookies HTTP, ya que el mecanismo completo es intr&#xED;nsecamente inseguro y esto no significa que cualquier informaci&#xF3;n est&#xE9; cifrada, por ejemplo.
-Los sitios inseguros (http:) no pueden configurar secure cookies. </p>
+Los sitios inseguros (http:) no pueden configurar secure cookies.</p>
 <p><strong>HttpOnly</strong> (Optional)
 Las cookies s&#xF3;lo de HTTP no son accesibles a trav&#xE9;s de JavaScript a trav&#xE9;s de la propiedad Document.cookie, las API XMLHttpRequest y Request para evitar ataques contra secuencias de comandos entre sitios (XSS).</p>
-<p><strong>SameSite=Strict</strong>
-<strong>SameSite=Lax</strong> (Optional)
+<p><strong> SameSite=Strict </strong>
+<strong> SameSite=Lax </strong> (Optional)
 Permite a los servidores afirmar que una cookie no debe enviarse junto con las solicitudes entre sitios, lo que proporciona cierta protecci&#xF3;n contra los ataques de falsificaci&#xF3;n de solicitudes entre sitios (CSRF).</p>
 <h4 id="session-cookies">Session Cookies</h4>
 <p>Las cookies de sesi&#xF3;n se eliminan cuando el cliente se cierra, solo est&#xE1;n activas durante la sesi&#xF3;n.
@@ -377,14 +377,14 @@ Ejemplo:</p>
 <pre><code>Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 </code></pre><h4 id="scope-of-ookies-alcance-de-las-cookies">Scope of ookies (alcance de las cookies)</h4>
 <p>Las directivas de dominio y ruta definen el &#xE1;mbito de la cookie, es decir, el conjunto de URL a las que se deben enviar las cookies.
-El <strong>dominio</strong> especifica los hosts a los que se enviar&#xE1; la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicaci&#xF3;n del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un <del>~Domain=mozilla.org</del>~, las cookies se incluyen en subdominios como <del>~developer.mozilla.org</del>~.
-<strong>Path</strong> indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El car&#xE1;cter slash (&quot;/&quot;) se interpreta como un separador de directorios y los subdirectorios se emparejar&#xE1;n tambi&#xE9;n. Por ejemplo, si establecemos <del>~Path=/docs</del>~, rutas v&#xE1;lidas podr&#xED;an ser: &quot;/docs&quot;, &quot;/docs/Web/&quot; o &quot;/docs/Web/HTTP&quot;.</p>
+El <strong>dominio</strong> especifica los hosts a los que se enviar&#xE1; la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicaci&#xF3;n del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un Domain = mozilla.org, las cookies se incluyen en subdominios como developer . mozilla . org.
+<strong>Path</strong> indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El car&#xE1;cter slash (&quot;/&quot;) se interpreta como un separador de directorios y los subdirectorios se emparejar&#xE1;n tambi&#xE9;n. Por ejemplo, si establecemos Path = /docs, rutas v&#xE1;lidas podr&#xED;an ser: &quot;/docs&quot;, &quot;/docs/Web/&quot; o &quot;/docs/Web/HTTP&quot;.</p>
 <h4 id="samesite-cookies">SameSite cookies</h4>
 <p>Este tipo de cookie permiten a los servidores afirmar que una cookie no debe enviarse junto con el resto de solicitudes.</p>
 <h4 id="javascript-access-using-documentcookies">JavaScript access using Document.cookies</h4>
 <p>Para crear nuevas cookies, podemos utilizar la propiedad <strong>Document.cookie</strong>, pudiendo acceder a las cookies creadas anteriormente (en el caso de que no tengan el inidicar HttpOnly).</p>
-<pre><code>document.cookie = &quot;yummy_cookie=choco&quot;; 
-document.cookie = &quot;tasty_cookie=strawberry&quot;; 
+<pre><code>document.cookie = &quot;yummy_cookie=choco&quot;;
+document.cookie = &quot;tasty_cookie=strawberry&quot;;
 console.log(document.cookie);
 </code></pre><h3 id="security">Security</h3>
 <h4 id="session-hijacking-and-xss">Session hijacking and XSS</h4>
@@ -447,7 +447,7 @@ Ejemplo:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Cookies","level":"1.11","depth":1,"next":{"title":"Query String","level":"1.12","depth":1,"path":"capituloQueryString/queryString.md","ref":"capituloQueryString/queryString.md","articles":[]},"previous":{"title":"Express","level":"1.10","depth":1,"path":"express/express.md","ref":"express/express.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulocookies/cookies.md","mtime":"2017-03-15T15:28:21.713Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T17:08:55.205Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Cookies","level":"1.11","depth":1,"next":{"title":"Query String","level":"1.12","depth":1,"path":"capituloQueryString/queryString.md","ref":"capituloQueryString/queryString.md","articles":[]},"previous":{"title":"Express","level":"1.10","depth":1,"path":"express/express.md","ref":"express/express.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"capitulocookies/cookies.md","mtime":"2017-03-15T18:45:14.258Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-15T18:45:59.907Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
