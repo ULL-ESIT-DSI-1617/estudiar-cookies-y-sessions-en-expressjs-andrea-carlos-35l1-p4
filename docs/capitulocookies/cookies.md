@@ -37,21 +37,21 @@ Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 ** < cookie-name > = < cookie-value > **  
 
 Una cookie puede comenzar con:
-* Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
-* Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
+* Un < cookie-name > puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
+* Un < cookie-value > puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
 * ** \_\_Secure- prefix: ** Las cookies con un nombre que comienza con \_\_Secure- (el guión es parte del prefijo) deben establecerse con el flag secure y deben venir de una página segura (HTTPS).
 * ** \_\_Host- prefix: ** Las cookies con un nombre que empiece por \_\_Host- deben estar definidas con el flag secure, deben ser de una página segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se envían a subdominios) y la ruta debe ser "/".
 
-**Expires=<date>** (Optional)
+**Expires=< date >** (Optional)
 La vida máxima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendrá la vida útil de una cookie de sesión. Una sesión finaliza cuando el cliente se cierra, lo que significa que las cookies de sesión se eliminarán en ese momento. Sin embargo, muchos navegadores web tienen una característica llamada sesión de restauración que guardará todas las pestañas y que al volver a acceder al navegador será como si la cookie no se hubiera cerrado nunca.
 
-**Max-Age=<non-zero-digit>** (Optional)
+**Max-Age=< non-zero-digit >** (Optional)
 Número de segundos hasta que expire la cookie. Se especifica con uno o más dígitos de 1 a 9.
 
-**Domain=<domain-value>** (Optional)
+**Domain=< domain-value >** (Optional)
 Especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Contrariamente a las especificaciones anteriores, los puntos principales en los nombres de dominio son ignorados. Si se especifica un dominio, los subdominios siempre se incluyen.
 
-**Path=<path-value>** (Optional)
+**Path=< path-value >** (Optional)
 Indica una ruta URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash("/") se interpreta como un separador de directorios.
 
 **Secure** (Optional)
@@ -92,8 +92,8 @@ Set-Cookie: id=a3fWa; Expires=Wed, 21 Oct 2015 07:28:00 GMT; Secure; HttpOnly
 
 ####Scope of ookies (alcance de las cookies)
 Las directivas de dominio y ruta definen el ámbito de la cookie, es decir, el conjunto de URL a las que se deben enviar las cookies.
-El **dominio** especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un Domain=mozilla.org, las cookies se incluyen en subdominios como developer.mozilla.org.
-**Path** indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash ("/") se interpreta como un separador de directorios y los subdirectorios se emparejarán también. Por ejemplo, si establecemos Path=/docs, rutas válidas podrían ser: "/docs", "/docs/Web/" o "/docs/Web/HTTP".
+El **dominio** especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Si se especifica un dominio, los subdominios siempre se incluyen. Por ejemplo, si especificamos un Domain = mozilla.org, las cookies se incluyen en subdominios como developer . mozilla . org.
+**Path** indica una ruta de acceso de URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash ("/") se interpreta como un separador de directorios y los subdirectorios se emparejarán también. Por ejemplo, si establecemos Path = /docs, rutas válidas podrían ser: "/docs", "/docs/Web/" o "/docs/Web/HTTP".
 
 ####SameSite cookies
 Este tipo de cookie permiten a los servidores afirmar que una cookie no debe enviarse junto con el resto de solicitudes.
