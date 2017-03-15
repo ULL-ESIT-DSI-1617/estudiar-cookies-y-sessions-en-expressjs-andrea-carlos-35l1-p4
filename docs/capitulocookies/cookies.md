@@ -32,8 +32,44 @@ Host: www.example.org
 Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 ~~~
 
+#####Directivas
+
+**<cookie-name>=<cookie-value>**
+Una cookie puede comenzar con:
+* Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
+* Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
+* __Secure- prefix: Las cookies con un nombre que comienza con __Secure-(el guión es parte del prefijo) deben establecerse con el flag secure y deben venir de una página segura (HTTPS).
+* __Host- prefix: Las cookies con un nombre que empiece por __Host- deben estar definidas con el flag secure, deben ser de una página segura (HTTPS), no deben tener un dominio especificado (y por lo tanto no se envían a subdominios) y la ruta debe ser "/".
+
+**Expires=<date>** (Optional)
+La vida máxima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendrá la vida útil de una cookie de sesión. Una sesión finaliza cuando el cliente se cierra, lo que significa que las cookies de sesión se eliminarán en ese momento. Sin embargo, muchos navegadores web tienen una característica llamada sesión de restauración que guardará todas las pestañas y que al volver a acceder al navegador será como si la cookie no se hubiera cerrado nunca.
+
+**Max-Age=<non-zero-digit>** (Optional)
+Número de segundos hasta que expire la cookie. Se especifica con uno o más dígitos de 1 a 9. 
+
+**Domain=<domain-value>** (Optional)
+Especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Contrariamente a las especificaciones anteriores, los puntos principales en los nombres de dominio son ignorados. Si se especifica un dominio, los subdominios siempre se incluyen.
+
+**Path=<path-value>** (Optional)
+Indica una ruta URL que debe existir en el recurso solicitado antes de enviar el Cookie header. El carácter slash("/") se interpreta como un separador de directorios.
+
+**Secure** (Optional)
+Una secure cookie sólo se enviará al servidor cuando se realice una solicitud utilizando SSL y el protocolo HTTPS. Sin embargo, la información confidencial o sensible nunca debe ser almacenada o transmitida en cookies HTTP, ya que el mecanismo completo es intrínsecamente inseguro y esto no significa que cualquier información esté cifrada, por ejemplo.
+Los sitios inseguros (http:) no pueden configurar secure cookies. 
+
+**HttpOnly** (Optional)
+Las cookies sólo de HTTP no son accesibles a través de JavaScript a través de la propiedad Document.cookie, las API XMLHttpRequest y Request para evitar ataques contra secuencias de comandos entre sitios (XSS).
+
+**SameSite=Strict**
+**SameSite=Lax** (Optional)
+Permite a los servidores afirmar que una cookie no debe enviarse junto con las solicitudes entre sitios, lo que proporciona cierta protección contra los ataques de falsificación de solicitudes entre sitios (CSRF).
+
 ####Session Cookies
 Las cookies de sesión se eliminan cuando el cliente se cierra, solo están activas durante la sesión.
+Ejemplo:
+~~~
+Set-Cookie: sessionid=38afes7a8; httponly; Path=/
+~~~
 
 ####Permanent Cookies
 Este tipo de cookies, en vez de expirar al cerrar la sesión del clientes, estas caducan en una fecha específica (Expires) o después de un período de tiempo específico (Max-Age).
@@ -83,17 +119,10 @@ Se pueden utilizar enlaces con direcciones engañosas en las que al entrar te pu
 ###Tracking and Privacy (Cookies de seguimiento y privacidad)
 ####Thrid-party cookies (Cookies de terceros)
 Las cookies tienen un dominio asociado a ellas. Si este dominio es el mismo que el dominio de la página en la que se encuentra, se dice que las cookies son una cookie de primera persona. Si el dominio es diferente, se dice que es una cookie de terceros. Si bien las cookies de primera persona se envían únicamente al servidor que las establece, una página web puede contener imágenes u otros componentes almacenados en servidores de otros dominios (como los banners publicitarios). Las cookies de terceros se utilizan principalmente para publicidad y seguimiento en toda la red.
+Ejemplo:
+~~~
+Set-Cookie: qwerty=219ffwef9w0f; Domain=somecompany.co.uk; Path=/; Expires=Wed, 30 Aug 2019 00:00:00 GMT
+~~~
 
 ####EU cookie directive
 La directiva de la UE significa que antes de que alguien pueda almacenar o recuperar cualquier información de un ordenador, teléfono móvil u otro dispositivo, el usuario debe dar su consentimiento para hacerlo.
-
-
-##Set-cookie (ya lo hago yo que es un apartado del primer punto y lo meteré ahi. Lo dificil son los ejemplos -.-)
-
-##Wikipedia: Query String
-
-##Cookie Module
-
-##Cookie Management in Express
-
-##A very basic session auth in node.js with express.js
