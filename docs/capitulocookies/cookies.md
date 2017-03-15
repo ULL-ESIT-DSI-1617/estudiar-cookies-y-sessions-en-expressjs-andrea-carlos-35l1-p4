@@ -1,14 +1,14 @@
 # Cookies y Sessions
 
-##HTTP cookies
+## HTTP cookies
 Un cookie HTTP es un pequeño fragmento de datos que un servidor envía a al navegador web del usuario, que puede almacenarlo y devolverlo al mismo servidor. Se suele utilizar para saber si dos solicitudes proceden del mismo navegador.
 Las cookies se suelen utilizar para:
 * Gestión de sesiones (inicios de sesión de usuarios).
 * Personalización (preferencias del usuario).
 * Seguimiento (análisis del comportamiento del usuario).
 
-###Creating Cookies
-####Set-Cookie and Cookie headers
+### Creating Cookies
+#### Set-Cookie and Cookie headers
 La cabecera de respuesta HTTP Set-Cookie se utiliza para enviar cookies desde el servidor al usuario. Una cookie sencilla se puede configurar de la siguiente manera:
 
 ~~~
@@ -32,9 +32,10 @@ Host: www.example.org
 Cookie: yummy_cookie=choco; tasty_cookie=strawberry
 ~~~
 
-#####Directivas
+##### Directivas
 
-**<cookie-name>=<cookie-value>**
+** < cookie-name > = < cookie-value > **  
+
 Una cookie puede comenzar con:
 * Un <cookie-name> puede ser cualquier cosa menos caracteres de control o espacios y pestañas. Tampoco debe contener caracteres como: ( ) < > @ , ; : \ " /  [ ] ? = { }.
 * Un <cookie-value> puede estar configurado opcionalmente entre comillas dobles y cualquier carácter ASCII, excluyendo CTL, espacios en blanco, comillas dobles, coma, punto y coma y barra invertida.
@@ -45,7 +46,7 @@ Una cookie puede comenzar con:
 La vida máxima de una cookie es la misma que la marca de tiempo especificada para un HTTP. Si no se especifica, la cookie tendrá la vida útil de una cookie de sesión. Una sesión finaliza cuando el cliente se cierra, lo que significa que las cookies de sesión se eliminarán en ese momento. Sin embargo, muchos navegadores web tienen una característica llamada sesión de restauración que guardará todas las pestañas y que al volver a acceder al navegador será como si la cookie no se hubiera cerrado nunca.
 
 **Max-Age=<non-zero-digit>** (Optional)
-Número de segundos hasta que expire la cookie. Se especifica con uno o más dígitos de 1 a 9. 
+Número de segundos hasta que expire la cookie. Se especifica con uno o más dígitos de 1 a 9.
 
 **Domain=<domain-value>** (Optional)
 Especifica los hosts a los que se enviará la cookie. Si no se especifica, el valor predeterminado es la parte del host de la ubicación del documento actual (pero sin incluir subdominios). Contrariamente a las especificaciones anteriores, los puntos principales en los nombres de dominio son ignorados. Si se especifica un dominio, los subdominios siempre se incluyen.
@@ -55,7 +56,7 @@ Indica una ruta URL que debe existir en el recurso solicitado antes de enviar el
 
 **Secure** (Optional)
 Una secure cookie sólo se enviará al servidor cuando se realice una solicitud utilizando SSL y el protocolo HTTPS. Sin embargo, la información confidencial o sensible nunca debe ser almacenada o transmitida en cookies HTTP, ya que el mecanismo completo es intrínsecamente inseguro y esto no significa que cualquier información esté cifrada, por ejemplo.
-Los sitios inseguros (http:) no pueden configurar secure cookies. 
+Los sitios inseguros (http:) no pueden configurar secure cookies.
 
 **HttpOnly** (Optional)
 Las cookies sólo de HTTP no son accesibles a través de JavaScript a través de la propiedad Document.cookie, las API XMLHttpRequest y Request para evitar ataques contra secuencias de comandos entre sitios (XSS).
@@ -100,9 +101,9 @@ Este tipo de cookie permiten a los servidores afirmar que una cookie no debe env
 ####JavaScript access using Document.cookies
 Para crear nuevas cookies, podemos utilizar la propiedad **Document.cookie**, pudiendo acceder a las cookies creadas anteriormente (en el caso de que no tengan el inidicar HttpOnly).
 ~~~
-document.cookie = "yummy_cookie=choco"; 
-document.cookie = "tasty_cookie=strawberry"; 
-console.log(document.cookie); 
+document.cookie = "yummy_cookie=choco";
+document.cookie = "tasty_cookie=strawberry";
+console.log(document.cookie);
 ~~~
 
 ###Security
