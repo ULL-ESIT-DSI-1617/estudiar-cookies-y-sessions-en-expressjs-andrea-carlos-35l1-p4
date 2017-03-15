@@ -68,21 +68,25 @@ Ahora podríamos ejecutar el fichero con el comando ~~~node session_auth.js~~~.
 Una vez con el servidor corriendo, podemos acceder a las siguientes direcciones:
 ~~~
 localhost:8088/content
-localhost:8088/login?username=amy&password=amyspassword
-localhost:8088/content
-localhost:8088/logout
+~~~
+![imagen](primercontent.png)
+
+~~~
+localhost:8088/login?username=amy&password=amyspassword~
+~~~
+![imagen](login.png)
+
+~~~
 localhost:8088/content
 ~~~
+![imagen](contentlogin.png)
 
+~~~
+localhost:8088/logout
+~~~
+![imagen](logout.png)
 
-
-
-
-
-
-
-
-
-
-
-
+~~~
+localhost:8088/content
+~~~
+![imagen](contentafterlogout.png)
